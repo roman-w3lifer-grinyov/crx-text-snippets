@@ -43,3 +43,7 @@ td input {
 td input[disabled] {
   cursor: pointer;
 }
+
+#add-char-snippet-button {
+  margin-top: 8px;
+}
