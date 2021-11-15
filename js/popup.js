@@ -3,6 +3,11 @@
 /* global chrome */
 
 window.addEventListener('DOMContentLoaded', () => {
+  const editText = 'Edit';
+  const saveText = 'Save';
+  const charSnippetEditButton = document.getElementById('char-snippet__edit-button');
+  charSnippetEditButton.textContent = editText;
+
   let inputs = null;
 
   const tbody = document.querySelector('tbody');
@@ -20,19 +25,16 @@ window.addEventListener('DOMContentLoaded', () => {
       tbody.appendChild(tr);
     }
     inputs = tbody.querySelectorAll('input');
-  });
 
-  const edit = document.getElementById('edit-button');
-  edit.addEventListener('click', event => {
-    event.preventDefault();
-    if (edit.getAttribute('data-editing')) {
-      inputs.forEach(input => input.setAttribute('disabled', 'true'));
-      edit.textContent = 'Edit';
-      edit.removeAttribute('data-editing');
-    } else {
-      inputs.forEach(input => input.removeAttribute('disabled'));
-      edit.textContent = 'Save';
-      edit.setAttribute('data-editing', 'true');
-    }
+    charSnippetEditButton.addEventListener('click', event => {
+      event.preventDefault();
+      if (charSnippetEditButton.textContent === saveText) {
+        inputs.forEach(input => input.setAttribute('disabled', 'true'));
+        charSnippetEditButton.textContent = editText;
+      } else {
+        inputs.forEach(input => input.removeAttribute('disabled'));
+        charSnippetEditButton.textContent = saveText;
+      }
+    });
   });
 });

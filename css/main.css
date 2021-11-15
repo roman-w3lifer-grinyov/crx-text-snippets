@@ -44,6 +44,6 @@ td input[disabled] {
   cursor: pointer;
 }
 
-#add-char-snippet-button {
+#char-snippet__add-row-button {
   margin-top: 8px;
 }
