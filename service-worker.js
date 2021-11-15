@@ -9,6 +9,7 @@ chrome.runtime.onInstalled.addListener(() => {
     },
     tds: {
       quantity: 10,
+      snippets: {},
     },
   });
 });

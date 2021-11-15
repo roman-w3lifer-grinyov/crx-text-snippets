@@ -12,6 +12,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
   const tbody = document.querySelector('tbody');
   chrome.storage.sync.get(storage => {
+    let key = 0;
     for (let i = 0; i < storage.trs.quantity; i++) {
       let tr = document.createElement('tr');
       for (let j = 0; j < storage.tds.quantity; j++) {
@@ -19,8 +20,10 @@ window.addEventListener('DOMContentLoaded', () => {
         let input = document.createElement('input');
         input.setAttribute('type', 'text');
         input.setAttribute('disabled', 'true');
+        input.value = storage.tds.snippets[key] || '';
         td.appendChild(input);
         tr.appendChild(td);
+        key++;
       }
       tbody.appendChild(tr);
     }
@@ -29,8 +32,16 @@ window.addEventListener('DOMContentLoaded', () => {
     charSnippetEditButton.addEventListener('click', event => {
       event.preventDefault();
       if (charSnippetEditButton.textContent === saveText) {
-        inputs.forEach(input => input.setAttribute('disabled', 'true'));
-        charSnippetEditButton.textContent = editText;
+        const snippets = {};
+        inputs.forEach((input, index) => {
+          input.setAttribute('disabled', 'true');
+          snippets[index] = input.value;
+        });
+        chrome.storage.sync.get(storage => {
+          storage.tds.snippets = snippets;
+          chrome.storage.sync.set(storage);
+          charSnippetEditButton.textContent = editText;
+        });
       } else {
         inputs.forEach(input => input.removeAttribute('disabled'));
         charSnippetEditButton.textContent = saveText;
