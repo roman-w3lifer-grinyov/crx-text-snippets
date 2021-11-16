@@ -11,6 +11,7 @@ body {
 #char-snippets__header,
 #text-snippets__header {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   margin-bottom: 10px;
 }
@@ -19,6 +20,12 @@ body {
 #text-snippets__header h1 {
   margin: 0;
   font-size: 16px;
+}
+
+#char-snippets__copied,
+#text-snippets__copied {
+  color: #f00;
+  visibility: hidden;
 }
 
 button {
@@ -100,7 +107,7 @@ hr {
   resize: vertical;
 }
 
-#char-snippets__table textarea[disabled] {
+#text-snippets__table textarea[disabled] {
   cursor: pointer;
 }
 

@@ -37,7 +37,6 @@ window.addEventListener('DOMContentLoaded', () => {
         let td = document.createElement('td');
         let input = document.createElement('input');
         input.setAttribute('type', 'text');
-        input.setAttribute('maxlength', '1');
         input.setAttribute('disabled', 'true');
         input.value = storage.snippets.char[key] || '';
         if (i >= minNumberOfTrs && (j + 1) % numberOfTds === 0) {
@@ -85,6 +84,7 @@ window.addEventListener('DOMContentLoaded', () => {
           setCharSnippets(storage);
         });
       }
+      copySnippet(event, 'char-snippets__copied');
     });
 
     /*
@@ -145,6 +145,7 @@ window.addEventListener('DOMContentLoaded', () => {
           setTextSnippets(storage);
         });
       }
+      copySnippet(event, 'text-snippets__copied');
     });
 
   });
@@ -181,6 +182,17 @@ window.addEventListener('DOMContentLoaded', () => {
     span.setAttribute('title', 'Delete snippet');
     span.textContent = '×';
     return span;
+  }
+
+  function copySnippet(event, selector)
+  {
+    if (!event.target.hasAttribute('disabled') || !event.target.value) {
+      return;
+    }
+    copyTextToClipboard(event.target.value);
+    const copiedMessage = document.getElementById(selector);
+    copiedMessage.style.visibility = 'visible';
+    setTimeout(() => copiedMessage.style.visibility = 'hidden', 1000);
   }
 
   function copyTextToClipboard(text)
