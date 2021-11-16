@@ -8,13 +8,15 @@ body {
   margin: 10px;
 }
 
-#header {
+#char-snippets__header,
+#text-snippets__header {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
-#header h1 {
+#char-snippets__header h1,
+#text-snippets__header h1 {
   margin: 0;
   font-size: 16px;
 }
@@ -23,11 +25,19 @@ button {
   cursor: pointer;
 }
 
+hr {
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 10px 0;
+}
+
+
 /*
  * =====================================================================================================================
  * CHAR SNIPPETS
  * =====================================================================================================================
  */
+
 
 #char-snippets__table td {
   border: 1px solid #ccc;
@@ -58,5 +68,51 @@ button {
 }
 
 #char-snippets__add-row-button {
-  margin-top: 8px;
+  margin-top: 10px;
+}
+
+
+/*
+ * =====================================================================================================================
+ * TEXT SNIPPETS
+ * =====================================================================================================================
+ */
+
+
+#text-snippets__edit-button {
+  float: right;
+}
+
+#text-snippets__table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#text-snippets__table td {
+  position: relative;
+}
+
+#text-snippets__table textarea {
+  border: 1px solid #ccc;
+  min-height: 36px;
+  width: 100%;
+  outline: 0;
+  resize: vertical;
+}
+
+#char-snippets__table textarea[disabled] {
+  cursor: pointer;
+}
+
+#text-snippets__table .delete-snippet-button {
+  color: #f00;
+  cursor: pointer;
+  display: block;
+  position: absolute;
+  top: 9px;
+  right: -8px;
+}
+
+#text-snippets__add-snippet-button {
+  margin-top: 10px;
 }
