@@ -23,13 +23,19 @@ button {
   cursor: pointer;
 }
 
-td {
+/*
+ * =====================================================================================================================
+ * CHAR SNIPPETS
+ * =====================================================================================================================
+ */
+
+#char-snippets__table td {
   border: 1px solid #ccc;
   padding: 0;
   position: relative;
 }
 
-td input {
+#char-snippets__table input {
   border: 0;
   height: 30px;
   width: 30px;
@@ -38,11 +44,11 @@ td input {
   text-align: center;
 }
 
-td input[disabled] {
+#char-snippets__table input[disabled] {
   cursor: pointer;
 }
 
-.char-snippets__delete-row-button {
+#char-snippets__table .delete-row-button {
   color: #f00;
   cursor: pointer;
   display: block;
