@@ -18,7 +18,6 @@ window.addEventListener('DOMContentLoaded', () => {
     let numberOfRows = storage.snippets.char.length < minNumberOfTrs * numberOfTds
       ? minNumberOfTrs
       : storage.snippets.char.length / numberOfTds;
-    console.log(numberOfRows);
     for (let i = 0; i < numberOfRows; i++) {
       let tr = document.createElement('tr');
       for (let j = 0; j < numberOfTds; j++) {

@@ -53,7 +53,6 @@ tr:nth-child(n + 4):after {
   content: '×';
   cursor: pointer;
   display: block;
-  font-weight: bold;
   height: 10px;
   width: 10px;
   position: absolute;
