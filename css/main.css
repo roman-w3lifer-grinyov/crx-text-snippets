@@ -8,27 +8,25 @@ body {
   margin: 10px;
 }
 
-form {
+#header {
   display: flex;
   justify-content: space-between;
   margin-bottom: 8px;
 }
 
-form h1 {
+#header h1 {
   margin: 0;
   font-size: 16px;
 }
 
-form button {
+button {
   cursor: pointer;
-}
-
-table {
 }
 
 td {
   border: 1px solid #ccc;
   padding: 0;
+  position: relative;
 }
 
 td input {
@@ -42,10 +40,6 @@ td input {
 
 td input[disabled] {
   cursor: pointer;
-}
-
-tr {
-  position: relative;
 }
 
 .char-snippet__delete-row-button {
