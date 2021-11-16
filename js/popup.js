@@ -3,7 +3,7 @@
 /* global chrome */
 
 window.addEventListener('DOMContentLoaded', () => {
-  const minNumberOfTrs = 3;
+  const minNumberOfTrs = 2;
   const numberOfTds = 10;
 
   const editText = 'Edit';
@@ -26,6 +26,9 @@ window.addEventListener('DOMContentLoaded', () => {
         input.setAttribute('type', 'text');
         input.setAttribute('disabled', 'true');
         input.value = storage.snippets.char[key] || '';
+        if (i >= minNumberOfTrs && (j + 1) % numberOfTds === 0) {
+          td.appendChild(getCharSnippetDeleteRowButton());
+        }
         td.appendChild(input);
         tr.appendChild(td);
         key++;
@@ -57,16 +60,36 @@ window.addEventListener('DOMContentLoaded', () => {
       chrome.storage.sync.get(storage => {
         const tr = tbody.querySelector('tr:last-child').cloneNode(true);
         tr.childNodes.forEach(td => td.firstChild.value = '');
+        tr.lastChild.appendChild(getCharSnippetDeleteRowButton());
         tbody.appendChild(tr);
-        const snippets = [];
-        tbody.querySelectorAll('input').forEach(input => {
-          snippets.push(input.value);
-        });
-        storage.snippets.char = snippets;
-        chrome.storage.sync.set(storage);
+        setCharSnippets(storage);
       });
     });
 
-    tbody.addEventListener('click', () => {})
+    tbody.addEventListener('click', event => {
+      if (event.target.classList.contains('char-snippet__delete-row-button')) {
+        chrome.storage.sync.get(storage => {
+          event.target.closest('tr').remove();
+          setCharSnippets(storage);
+        });
+      }
+    });
   });
+
+  function setCharSnippets(storage)
+  {
+    const snippets = [];
+    tbody.querySelectorAll('input').forEach(input => snippets.push(input.value));
+    storage.snippets.char = snippets;
+    chrome.storage.sync.set(storage);
+  }
+
+  function getCharSnippetDeleteRowButton()
+  {
+    const span = document.createElement('span');
+    span.classList.add('char-snippet__delete-row-button');
+    span.setAttribute('title', 'Delete row');
+    span.textContent = '×';
+    return span;
+  }
 });
