@@ -8,10 +8,10 @@ window.addEventListener('DOMContentLoaded', () => {
 
   const editText = 'Edit';
   const saveText = 'Save';
-  const charSnippetEditButton = document.getElementById('char-snippet__edit-button');
+  const charSnippetEditButton = document.getElementById('char-snippets__edit-button');
   charSnippetEditButton.textContent = editText;
   const tbody = document.querySelector('tbody');
-  const charSnippetAddRowButton = document.getElementById('char-snippet__add-row-button');
+  const charSnippetAddRowButton = document.getElementById('char-snippets__add-row-button');
 
   chrome.storage.sync.get(storage => {
     let key = 0;
@@ -67,7 +67,7 @@ window.addEventListener('DOMContentLoaded', () => {
     });
 
     tbody.addEventListener('click', event => {
-      if (event.target.classList.contains('char-snippet__delete-row-button')) {
+      if (event.target.classList.contains('char-snippets__delete-row-button')) {
         chrome.storage.sync.get(storage => {
           event.target.closest('tr').remove();
           setCharSnippets(storage);
@@ -87,7 +87,7 @@ window.addEventListener('DOMContentLoaded', () => {
   function getCharSnippetDeleteRowButton()
   {
     const span = document.createElement('span');
-    span.classList.add('char-snippet__delete-row-button');
+    span.classList.add('char-snippets__delete-row-button');
     span.setAttribute('title', 'Delete row');
     span.textContent = '×';
     return span;

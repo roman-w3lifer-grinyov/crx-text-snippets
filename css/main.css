@@ -42,7 +42,7 @@ td input[disabled] {
   cursor: pointer;
 }
 
-.char-snippet__delete-row-button {
+.char-snippets__delete-row-button {
   color: #f00;
   cursor: pointer;
   display: block;
@@ -51,6 +51,6 @@ td input[disabled] {
   right: -10px;
 }
 
-#char-snippet__add-row-button {
+#char-snippets__add-row-button {
   margin-top: 8px;
 }
