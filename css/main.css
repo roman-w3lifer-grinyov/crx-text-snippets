@@ -28,6 +28,10 @@ body {
   visibility: hidden;
 }
 
+.copied {
+  background: #ddd;
+}
+
 button {
   cursor: pointer;
 }

@@ -191,8 +191,12 @@ window.addEventListener('DOMContentLoaded', () => {
     }
     copyTextToClipboard(event.target.value);
     const copiedMessage = document.getElementById(selector);
+    event.target.classList.add('copied');
     copiedMessage.style.visibility = 'visible';
-    setTimeout(() => copiedMessage.style.visibility = 'hidden', 1000);
+    setTimeout(() => {
+      copiedMessage.style.visibility = 'hidden';
+      event.target.classList.remove('copied');
+    }, 1000);
   }
 
   function copyTextToClipboard(text)
