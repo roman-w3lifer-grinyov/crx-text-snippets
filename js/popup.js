@@ -87,6 +87,16 @@ window.addEventListener('DOMContentLoaded', () => {
       copySnippet(event, 'char-snippets__copied');
     });
 
+    document.getElementById('char-snippets__clear-all-button').addEventListener('click', () => {
+      if (!confirm('Are you sure you want to delete all char snippets?')) {
+        return;
+      }
+      chrome.storage.sync.get(storage => {
+        charSnippetsTbody.querySelectorAll('input').forEach(input => input.value = '');
+        setCharSnippets(storage);
+      });
+    });
+
     /*
      * =================================================================================================================
      * TEXT SNIPPETS
@@ -146,6 +156,16 @@ window.addEventListener('DOMContentLoaded', () => {
         });
       }
       copySnippet(event, 'text-snippets__copied');
+    });
+
+    document.getElementById('text-snippets__clear-all-button').addEventListener('click', () => {
+      if (!confirm('Are you sure you want to delete all text snippets?')) {
+        return;
+      }
+      chrome.storage.sync.get(storage => {
+        textSnippetsTbody.querySelectorAll('textarea').forEach(textarea => textarea.value = '');
+        setTextSnippets(storage);
+      });
     });
 
   });
