@@ -40,7 +40,7 @@ window.addEventListener('DOMContentLoaded', () => {
         input.setAttribute('disabled', 'true');
         input.value = storage.snippets.char[key] || '';
         if (i >= minNumberOfTrs && (j + 1) % numberOfTds === 0) {
-          td.appendChild(getCharSnippetDeleteRowButton());
+          td.appendChild(getCharSnippetsDeleteRowButton());
         }
         td.appendChild(input);
         tr.appendChild(td);
@@ -71,7 +71,7 @@ window.addEventListener('DOMContentLoaded', () => {
       chrome.storage.sync.get(storage => {
         const tr = charSnippetsTbody.querySelector('tr:last-child').cloneNode(true);
         tr.childNodes.forEach(td => td.querySelector('input').value = '');
-        tr.lastChild.appendChild(getCharSnippetDeleteRowButton());
+        tr.lastChild.appendChild(getCharSnippetsDeleteRowButton());
         charSnippetsTbody.appendChild(tr);
         setCharSnippets(storage);
       });
@@ -166,7 +166,7 @@ window.addEventListener('DOMContentLoaded', () => {
     chrome.storage.sync.set(storage);
   }
 
-  function getCharSnippetDeleteRowButton()
+  function getCharSnippetsDeleteRowButton()
   {
     const span = document.createElement('span');
     span.classList.add('delete-row-button');
