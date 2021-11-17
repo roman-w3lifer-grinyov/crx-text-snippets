@@ -11,7 +11,11 @@ window.addEventListener('DOMContentLoaded', () => {
     .addEventListener('click', () => {
       chrome.storage.sync.get(storage => {
         chrome.downloads.download({
-          url: 'data:application/json;base64,' + btoa(JSON.stringify(storage)),
+          url: 'data:application/json;base64,' + btoa(
+            unescape( // https://stackoverflow.com/a/26603875/4223982
+              encodeURIComponent(JSON.stringify(storage))
+            )
+          ),
           filename: 'text-snippets.json',
         });
       });
