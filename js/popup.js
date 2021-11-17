@@ -229,4 +229,7 @@ window.addEventListener('DOMContentLoaded', () => {
     document.body.removeChild(textarea);
   }
 
+  charSnippetsTbody.addEventListener('input', () => chrome.storage.sync.get(storage => setCharSnippets(storage)));
+  textSnippetsTbody.addEventListener('input', () => chrome.storage.sync.get(storage => setTextSnippets(storage)));
+
 });
