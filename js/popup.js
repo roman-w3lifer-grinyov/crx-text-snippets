@@ -232,4 +232,11 @@ window.addEventListener('DOMContentLoaded', () => {
   charSnippetsTbody.addEventListener('input', () => chrome.storage.sync.get(storage => setCharSnippets(storage)));
   textSnippetsTbody.addEventListener('input', () => chrome.storage.sync.get(storage => setTextSnippets(storage)));
 
+  /*
+   * =================================================================================================================
+   * TEXT SNIPPETS
+   * =================================================================================================================
+   */
+
+  document.getElementById('export-import-button').addEventListener('click', () => chrome.runtime.openOptionsPage());
 });

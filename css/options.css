@@ -1,0 +1,27 @@
+@charset "utf-8";
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 90vh;
+  margin: 0;
+}
+
+h1 {
+  text-align: center;
+}
+
+#export-import-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#export-import-wrapper button {
+  margin: 0 20px;
+}
