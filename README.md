@@ -1,4 +1,4 @@
-# [Text Snippets](https://chrome.google.com/webstore/detail/)
+# [Text Snippets](https://chrome.google.com/webstore/detail/fcnigcfjfldikdpnncockbjnjflkjkfm)
 
 - [Installation for developers (for Linux users)](#installation-for-developers-for-linux-users)
 - [Sources](#sources)
