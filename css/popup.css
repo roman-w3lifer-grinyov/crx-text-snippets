@@ -112,7 +112,7 @@ hr {
 
 #text-snippets__table textarea {
   border: 1px solid #ccc;
-  min-height: 36px;
+  min-height: 50px;
   width: 100%;
   outline: 0;
   resize: vertical;
