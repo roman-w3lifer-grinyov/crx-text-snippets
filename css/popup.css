@@ -31,12 +31,12 @@ body {
 
 #char-snippets__copied,
 #text-snippets__copied {
-  color: #f00;
+  color: #fb0000;
   visibility: hidden;
 }
 
 .copied {
-  background: #ddd;
+  background: #eee;
 }
 
 button {

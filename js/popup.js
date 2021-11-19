@@ -206,15 +206,21 @@ window.addEventListener('DOMContentLoaded', () => {
 
   function copySnippet(event, selector)
   {
-    if (!event.target.hasAttribute('disabled') || !event.target.value) {
+    if (!event.target.hasAttribute('disabled')) {
       return;
     }
-    copyTextToClipboard(event.target.value);
     const copiedMessage = document.getElementById(selector);
+    if (!event.target.value) {
+      copiedMessage.textContent = 'Nothing to copy!';
+    } else {
+      copyTextToClipboard(event.target.value);
+      copiedMessage.textContent = 'Copied!';
+    }
     event.target.classList.add('copied');
     copiedMessage.style.visibility = 'visible';
     setTimeout(() => {
       copiedMessage.style.visibility = 'hidden';
+      copiedMessage.textContent = '';
       event.target.classList.remove('copied');
     }, 1000);
   }
