@@ -49,6 +49,11 @@ hr {
   margin: 10px 0;
 }
 
+.copyable {
+  background: #fafafa;
+  cursor: copy;
+}
+
 
 /*
  * =====================================================================================================================
@@ -87,11 +92,6 @@ hr {
 
 #char-snippets__add-row-button {
   margin-top: 10px;
-}
-
-.copyable {
-  background: #fafafa;
-  cursor: copy;
 }
 
 
