@@ -37,7 +37,8 @@ window.addEventListener('DOMContentLoaded', () => {
         let td = document.createElement('td');
         let input = document.createElement('input');
         input.setAttribute('type', 'text');
-        input.setAttribute('disabled', 'true');
+        input.setAttribute('readonly', 'true');
+        input.classList.add('copyable');
         input.value = storage.snippets.char[key] || '';
         if (i >= minNumberOfTrs && (j + 1) % numberOfTds === 0) {
           td.appendChild(getCharSnippetsDeleteRowButton());
@@ -53,7 +54,8 @@ window.addEventListener('DOMContentLoaded', () => {
       if (charSnippetsEditButton.textContent === saveText) {
         const snippets = [];
         charSnippetsTbody.querySelectorAll('input').forEach(input => {
-          input.setAttribute('disabled', 'true');
+          input.setAttribute('readonly', 'true');
+          input.classList.add('copyable');
           snippets.push(input.value);
         });
         chrome.storage.sync.get(storage => {
@@ -62,7 +64,10 @@ window.addEventListener('DOMContentLoaded', () => {
           charSnippetsEditButton.textContent = editText;
         });
       } else {
-        charSnippetsTbody.querySelectorAll('input').forEach(input => input.removeAttribute('disabled'));
+        charSnippetsTbody.querySelectorAll('input').forEach(input => {
+          input.removeAttribute('readonly');
+          input.classList.remove('copyable');
+        });
         charSnippetsEditButton.textContent = saveText;
       }
     });
@@ -110,7 +115,8 @@ window.addEventListener('DOMContentLoaded', () => {
       let tr = document.createElement('tr');
       let td = document.createElement('td');
       let textarea = document.createElement('textarea');
-      textarea.setAttribute('disabled', 'true');
+      textarea.setAttribute('readonly', 'true');
+      textarea.classList.add('copyable');
       textarea.value = storage.snippets.text[i] || '';
       if (i >= minNumberOfTrs) {
         td.appendChild(getTextSnippetDeleteRowButton());
@@ -124,7 +130,8 @@ window.addEventListener('DOMContentLoaded', () => {
       if (textSnippetsEditButton.textContent === saveText) {
         const snippets = [];
         textSnippetsTbody.querySelectorAll('textarea').forEach(textarea => {
-          textarea.setAttribute('disabled', 'true');
+          textarea.setAttribute('readonly', 'true');
+          textarea.classList.add('copyable');
           snippets.push(textarea.value);
         });
         chrome.storage.sync.get(storage => {
@@ -133,7 +140,10 @@ window.addEventListener('DOMContentLoaded', () => {
           textSnippetsEditButton.textContent = editText;
         });
       } else {
-        textSnippetsTbody.querySelectorAll('textarea').forEach(textarea => textarea.removeAttribute('disabled'));
+        textSnippetsTbody.querySelectorAll('textarea').forEach(textarea => {
+          textarea.removeAttribute('readonly');
+          textarea.classList.remove('copyable');
+        });
         textSnippetsEditButton.textContent = saveText;
       }
     });
@@ -206,7 +216,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
   function copySnippet(event, selector)
   {
-    if (!event.target.hasAttribute('disabled')) {
+    if (!event.target.classList.contains('copyable')) {
       return;
     }
     const copiedMessage = document.getElementById(selector);
