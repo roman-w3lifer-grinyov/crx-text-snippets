@@ -18,7 +18,7 @@
     "default_popup": "html/popup.html"
   },
   "background": {
-    "service_worker": "service-worker.js"
+    "service_worker": "js/service_worker.js"
   },
   "options_page": "html/options.html",
   "permissions": ["downloads", "storage"]
