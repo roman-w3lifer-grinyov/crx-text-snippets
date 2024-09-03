@@ -36,10 +36,6 @@ body {
   visibility: hidden;
 }
 
-.copied {
-  background: #eee;
-}
-
 button {
   cursor: pointer;
 }
@@ -64,7 +60,6 @@ hr {
 #char-snippets-table td {
   border: 1px solid #ccc;
   padding: 0;
-  position: relative;
 }
 
 #char-snippets-table input {
@@ -95,17 +90,8 @@ hr {
  * =====================================================================================================================
  */
 
-#text-snippets-edit-button {
-  float: right;
-}
-
 #text-snippets-table {
-  border-collapse: collapse;
   width: 100%;
-}
-
-#text-snippets-table td {
-  position: relative;
 }
 
 #text-snippets-table textarea {

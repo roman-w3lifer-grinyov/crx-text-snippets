@@ -226,7 +226,6 @@ window.addEventListener('DOMContentLoaded', _ => {
       copyTextToClipboard(event.target.value)
       copiedMessage.textContent = 'Copied!'
     }
-    event.target.classList.add('copied')
     copiedMessage.style.visibility = 'visible'
     setTimeout(_ => {
       copiedMessage.style.visibility = 'hidden'
