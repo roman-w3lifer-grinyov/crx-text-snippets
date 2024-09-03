@@ -8,29 +8,30 @@ body {
   margin: 10px;
 }
 
-#char-snippets__header,
-#text-snippets__header {
+#char-snippets-header-container,
+#text-snippets-header-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 10px;
 }
 
-#char-snippets__footer,
-#text-snippets__footer {
+#char-snippets-footer-container,
+#text-snippets-footer-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-top: 10px;
 }
 
-#char-snippets__header h1,
-#text-snippets__header h1 {
+#char-snippets-header-container h1,
+#text-snippets-header-container h1 {
   margin: 0;
   font-size: 16px;
 }
 
-#char-snippets__copied,
-#text-snippets__copied {
+#char-snippets-notification-box,
+#text-snippets-notification-box {
   color: #fb0000;
   visibility: hidden;
 }
@@ -54,21 +55,19 @@ hr {
   cursor: copy;
 }
 
-
 /*
  * =====================================================================================================================
  * CHAR SNIPPETS
  * =====================================================================================================================
  */
 
-
-#char-snippets__table td {
+#char-snippets-table td {
   border: 1px solid #ccc;
   padding: 0;
   position: relative;
 }
 
-#char-snippets__table input {
+#char-snippets-table input {
   border: 0;
   height: 30px;
   width: 30px;
@@ -77,11 +76,11 @@ hr {
   text-align: center;
 }
 
-#char-snippets__table input[disabled] {
+#char-snippets-table input[disabled] {
   cursor: copy;
 }
 
-#char-snippets__table .delete-row-button {
+#char-snippets-table .delete-row-button {
   color: #f00;
   cursor: pointer;
   display: block;
@@ -90,32 +89,26 @@ hr {
   right: -10px;
 }
 
-#char-snippets__add-row-button {
-  margin-top: 10px;
-}
-
-
 /*
  * =====================================================================================================================
  * TEXT SNIPPETS
  * =====================================================================================================================
  */
 
-
-#text-snippets__edit-button {
+#text-snippets-edit-button {
   float: right;
 }
 
-#text-snippets__table {
+#text-snippets-table {
   border-collapse: collapse;
   width: 100%;
 }
 
-#text-snippets__table td {
+#text-snippets-table td {
   position: relative;
 }
 
-#text-snippets__table textarea {
+#text-snippets-table textarea {
   border: 1px solid #ccc;
   min-height: 50px;
   width: 100%;
@@ -123,11 +116,11 @@ hr {
   resize: vertical;
 }
 
-#text-snippets__table textarea[disabled] {
+#text-snippets-table textarea[disabled] {
   cursor: copy;
 }
 
-#text-snippets__table .delete-snippet-button {
+#text-snippets-table .delete-snippet-button {
   color: #f00;
   cursor: pointer;
   display: block;
@@ -136,19 +129,13 @@ hr {
   right: -8px;
 }
 
-#text-snippets__add-snippet-button {
-  margin-top: 10px;
-}
-
-
 /*
  * =====================================================================================================================
  * EXPORT & IMPORT
  * =====================================================================================================================
  */
 
-
-#export-import-button {
-  display: block;
-  margin: auto;
+#export-import-buttons-container {
+  display: flex;
+  justify-content: space-evenly;
 }

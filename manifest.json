@@ -17,9 +17,11 @@
     "default_title": "Text Snippets",
     "default_popup": "html/popup.html"
   },
-  "options_page": "html/options.html",
   "background": {
     "service_worker": "js/service-worker.js"
   },
-  "permissions": ["downloads", "storage"]
+  "permissions": [
+    "downloads",
+    "storage"
+  ]
 }

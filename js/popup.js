@@ -2,6 +2,7 @@
 /* global chrome */
 
 window.addEventListener('DOMContentLoaded', _ => {
+
   const minNumberOfTrs = 2
   const numberOfTds = 10
 
@@ -10,12 +11,12 @@ window.addEventListener('DOMContentLoaded', _ => {
 
   const charSnippetsEditButton = document.getElementById('char-snippets__edit-button')
   charSnippetsEditButton.textContent = editText
-  const charSnippetsTbody = document.querySelector('#char-snippets__table tbody')
+  const charSnippetsTbody = document.querySelector('#char-snippets-table tbody')
   const charSnippetsAddRowButton = document.getElementById('char-snippets__add-row-button')
 
-  const textSnippetsEditButton = document.getElementById('text-snippets__edit-button')
+  const textSnippetsEditButton = document.getElementById('text-snippets-edit-button')
   textSnippetsEditButton.textContent = editText
-  const textSnippetsTbody = document.querySelector('#text-snippets__table tbody')
+  const textSnippetsTbody = document.querySelector('#text-snippets-table tbody')
   const textSnippetsAddSnippetButton = document.getElementById('text-snippets__add-snippet-button')
 
   chrome.storage.sync.get(storage => {
@@ -88,11 +89,11 @@ window.addEventListener('DOMContentLoaded', _ => {
           setCharSnippets(storage)
         })
       }
-      copySnippet(event, 'char-snippets__copied')
+      copySnippet(event, 'char-snippets-notification-box')
     })
 
     document.getElementById('char-snippets__clear-all-button').addEventListener('click', _ => {
-      if (!confirm('Are you sure you want to delete all char snippets?')) {
+      if (!confirm('Your char snippets will be deleted!')) {
         return
       }
       chrome.storage.sync.get(storage => {
@@ -164,11 +165,11 @@ window.addEventListener('DOMContentLoaded', _ => {
           setTextSnippets(storage)
         })
       }
-      copySnippet(event, 'text-snippets__copied')
+      copySnippet(event, 'text-snippets-notification-box')
     })
 
     document.getElementById('text-snippets__clear-all-button').addEventListener('click', _ => {
-      if (!confirm('Are you sure you want to delete all text snippets?')) {
+      if (!confirm('Your text snippets will be deleted!')) {
         return
       }
       chrome.storage.sync.get(storage => {
@@ -249,9 +250,45 @@ window.addEventListener('DOMContentLoaded', _ => {
 
   /*
    * =================================================================================================================
-   * TEXT SNIPPETS
+   * EXPORT/IMPORT BUTTONS
    * =================================================================================================================
    */
 
-  document.getElementById('export-import-button').addEventListener('click', _ => chrome.runtime.openOptionsPage())
+  // https://stackoverflow.com/a/23167789/4223982
+  document
+    .getElementById('export-button')
+    .addEventListener('click', _ => {
+      chrome.storage.sync.get(storage => {
+        chrome.downloads.download({
+          url: 'data:application/json;base64,' + btoa(
+            unescape( // https://stackoverflow.com/a/26603875/4223982
+              encodeURIComponent(JSON.stringify(storage))
+            )
+          ),
+          filename: 'text-snippets.json',
+        })
+      })
+    })
+
+  // https://stackoverflow.com/a/36930012/4223982
+  document
+    .getElementById('import-button')
+    .addEventListener('click', _ => {
+      const fileChooser = document.createElement('input')
+      fileChooser.type = 'file'
+      fileChooser.addEventListener('change', _ => {
+        const file = fileChooser.files[0]
+        const reader = new FileReader()
+        reader.onload = _ => {
+          const storage = JSON.parse('' + reader.result)
+          chrome.storage.sync.set(storage, _ => alert('Imported!'))
+        }
+        reader.readAsText(file)
+        form.reset()
+      })
+      const form = document.createElement('form')
+      form.appendChild(fileChooser)
+      fileChooser.click()
+    })
+
 })
