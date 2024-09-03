@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Text Snippets",
-  "description": "Prepare pieces of text (icons, emoji, phrases, etc) and keep them always at hand",
+  "description": "Prepare text fragments (icons, emoji, phrases, etc.) and keep them always at hand",
   "version": "1.1.9",
   "icons": {
     "16": "img/icons/16x16.png",
@@ -17,9 +17,9 @@
     "default_title": "Text Snippets",
     "default_popup": "html/popup.html"
   },
-  "background": {
-    "service_worker": "js/service_worker.js"
-  },
   "options_page": "html/options.html",
+  "background": {
+    "service_worker": "js/service-worker.js"
+  },
   "permissions": ["downloads", "storage"]
 }

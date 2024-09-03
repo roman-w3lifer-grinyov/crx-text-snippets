@@ -1,13 +1,13 @@
-# [Text Snippets](https://chrome.google.com/webstore/detail/fcnigcfjfldikdpnncockbjnjflkjkfm)
+# [Text Snippets](https://chromewebstore.google.com/detail/fcnigcfjfldikdpnncockbjnjflkjkfm)
 
-- [Chrome Web Store](https://chrome.google.com/webstore/detail/fcnigcfjfldikdpnncockbjnjflkjkfm)
+- [Chrome Web Store](https://chromewebstore.google.com/detail/fcnigcfjfldikdpnncockbjnjflkjkfm)
 - [Installation for developers (for Linux users)](#installation-for-developers-for-linux-users)
 - [Sources](#sources)
     - [Icons](#icons)
 
 ---
 
-![Example](img/screenshots/1280x800/example.png)
+![Text Snippets - Example](img/screenshots/1280x800/example.png)
 
 ---
 
@@ -24,4 +24,4 @@
 
 ### Icons
 
-- [Copy](https://flaticon.com/premium-icon/copy_2959162)
+- [Copy](https://www.flaticon.com/free-icon/copy_2959162)
