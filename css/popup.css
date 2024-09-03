@@ -97,6 +97,8 @@ hr {
 
 #text-snippets-table textarea {
   border: 1px solid #ccc;
+  field-sizing: content;
+  max-width: 344px;
   min-height: 50px;
   width: 100%;
   outline: 0;
