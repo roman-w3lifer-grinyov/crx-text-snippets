@@ -9,7 +9,7 @@ window.addEventListener('DOMContentLoaded', _ => {
   const editText = 'Edit'
   const saveText = 'Save'
 
-  const charSnippetsEditButton = document.getElementById('char-snippets__edit-button')
+  const charSnippetsEditButton = document.getElementById('char-snippets-edit-button')
   charSnippetsEditButton.textContent = editText
   const charSnippetsTbody = document.querySelector('#char-snippets-table tbody')
   const charSnippetsAddRowButton = document.getElementById('char-snippets-add-row-button')
