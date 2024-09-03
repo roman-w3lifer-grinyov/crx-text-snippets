@@ -12,12 +12,12 @@ window.addEventListener('DOMContentLoaded', _ => {
   const charSnippetsEditButton = document.getElementById('char-snippets__edit-button')
   charSnippetsEditButton.textContent = editText
   const charSnippetsTbody = document.querySelector('#char-snippets-table tbody')
-  const charSnippetsAddRowButton = document.getElementById('char-snippets__add-row-button')
+  const charSnippetsAddRowButton = document.getElementById('char-snippets-add-row-button')
 
   const textSnippetsEditButton = document.getElementById('text-snippets-edit-button')
   textSnippetsEditButton.textContent = editText
   const textSnippetsTbody = document.querySelector('#text-snippets-table tbody')
-  const textSnippetsAddSnippetButton = document.getElementById('text-snippets__add-snippet-button')
+  const textSnippetsAddSnippetButton = document.getElementById('text-snippets-add-snippet-button')
 
   chrome.storage.sync.get(storage => {
 
@@ -92,7 +92,7 @@ window.addEventListener('DOMContentLoaded', _ => {
       copySnippet(event, 'char-snippets-notification-box')
     })
 
-    document.getElementById('char-snippets__clear-all-button').addEventListener('click', _ => {
+    document.getElementById('char-snippets-clear-all-button').addEventListener('click', _ => {
       if (!confirm('Your char snippets will be deleted!')) {
         return
       }
@@ -168,7 +168,7 @@ window.addEventListener('DOMContentLoaded', _ => {
       copySnippet(event, 'text-snippets-notification-box')
     })
 
-    document.getElementById('text-snippets__clear-all-button').addEventListener('click', _ => {
+    document.getElementById('text-snippets-clear-all-button').addEventListener('click', _ => {
       if (!confirm('Your text snippets will be deleted!')) {
         return
       }
