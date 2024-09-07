@@ -72,6 +72,7 @@ window.addEventListener('DOMContentLoaded', _ => {
       tr.childNodes.forEach(td => td.querySelector('input').value = '')
       tr.lastChild.appendChild(getCharSnippetsDeleteRowButton())
       charSnippetsTable.appendChild(tr)
+      charSnippetsEditButton.click()
     })
 
     charSnippetsTable.addEventListener('click', event => {
@@ -136,6 +137,7 @@ window.addEventListener('DOMContentLoaded', _ => {
       tr.querySelector('textarea').value = ''
       tr.lastChild.appendChild(getTextSnippetDeleteRowButton())
       textSnippetsTable.appendChild(tr)
+      textSnippetsEditButton.click()
     })
 
     textSnippetsTable.addEventListener('click', event => {
