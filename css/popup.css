@@ -1,39 +1,12 @@
 @charset "utf-8";
 
-* {
-  box-sizing: border-box;
-}
-
-#char-snippets-header-container,
-#text-snippets-header-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 10px;
-}
-
-#char-snippets-footer-container,
-#text-snippets-footer-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 10px;
-}
-
-#char-snippets-header-container h1,
-#text-snippets-header-container h1 {
-  margin: 0;
-  font-size: 16px;
-}
-
-#char-snippets-notification-box,
-#text-snippets-notification-box {
-  color: #fb0000;
-  visibility: hidden;
-}
-
 button {
   cursor: pointer;
+}
+
+h2 {
+  margin: 0;
+  font-size: 16px;
 }
 
 hr {
@@ -45,6 +18,28 @@ hr {
 .copyable {
   background: #fafafa;
   cursor: copy;
+}
+
+#char-snippets-header-container,
+#text-snippets-header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+#char-snippets-notification-box,
+#text-snippets-notification-box {
+  color: #fb0000;
+  visibility: hidden;
+}
+
+#char-snippets-footer-container,
+#text-snippets-footer-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
 }
 
 /*

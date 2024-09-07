@@ -3,19 +3,19 @@
 
 window.addEventListener('DOMContentLoaded', _ => {
 
-  const minNumberOfTrs = 2
-  const numberOfTds = 10
+  const app = {}
+  app.minNumberOfTrs = 2
+  app.numberOfTds = 10
+  app.editText = 'Edit'
+  app.saveText = 'Save'
 
-  const editText = 'Edit'
-  const saveText = 'Save'
-
-  const charSnippetsEditButton = document.getElementById('char-snippets-edit-button')
-  charSnippetsEditButton.textContent = editText
+  const charSnippetsEditButton = document.getElementById('char-snippets-edit-save-button')
+  charSnippetsEditButton.textContent = app.editText
   const charSnippetsTbody = document.querySelector('#char-snippets-table tbody')
   const charSnippetsAddRowButton = document.getElementById('char-snippets-add-row-button')
 
-  const textSnippetsEditButton = document.getElementById('text-snippets-edit-button')
-  textSnippetsEditButton.textContent = editText
+  const textSnippetsEditButton = document.getElementById('text-snippets-edit-save-button')
+  textSnippetsEditButton.textContent = app.editText
   const textSnippetsTbody = document.querySelector('#text-snippets-table tbody')
   const textSnippetsAddSnippetButton = document.getElementById('text-snippets-add-snippet-button')
 
@@ -28,19 +28,19 @@ window.addEventListener('DOMContentLoaded', _ => {
      */
 
     let key = 0
-    let numberOfRows = storage.snippets.char.length < minNumberOfTrs * numberOfTds
-      ? minNumberOfTrs
-      : storage.snippets.char.length / numberOfTds
+    let numberOfRows = storage.snippets.charSnippets.length < app.minNumberOfTrs * app.numberOfTds
+      ? app.minNumberOfTrs
+      : storage.snippets.charSnippets.length / app.numberOfTds
     for (let i = 0; i < numberOfRows; i++) {
       let tr = document.createElement('tr')
-      for (let j = 0; j < numberOfTds; j++) {
+      for (let j = 0; j < app.numberOfTds; j++) {
         let td = document.createElement('td')
         let input = document.createElement('input')
         input.setAttribute('type', 'text')
         input.setAttribute('readonly', 'true')
         input.classList.add('copyable')
-        input.value = storage.snippets.char[key] || ''
-        if (i >= minNumberOfTrs && (j + 1) % numberOfTds === 0) {
+        input.value = storage.snippets.charSnippets[key] || ''
+        if (i >= app.minNumberOfTrs && (j + 1) % app.numberOfTds === 0) {
           td.appendChild(getCharSnippetsDeleteRowButton())
         }
         td.appendChild(input)
@@ -51,7 +51,7 @@ window.addEventListener('DOMContentLoaded', _ => {
     }
 
     charSnippetsEditButton.addEventListener('click', _ => {
-      if (charSnippetsEditButton.textContent === saveText) {
+      if (charSnippetsEditButton.textContent === app.saveText) {
         const snippets = []
         charSnippetsTbody.querySelectorAll('input').forEach(input => {
           input.setAttribute('readonly', 'true')
@@ -59,16 +59,16 @@ window.addEventListener('DOMContentLoaded', _ => {
           snippets.push(input.value)
         })
         chrome.storage.sync.get(storage => {
-          storage.snippets.char = snippets
+          storage.snippets.charSnippets = snippets
           chrome.storage.sync.set(storage)
-          charSnippetsEditButton.textContent = editText
+          charSnippetsEditButton.textContent = app.editText
         })
       } else {
         charSnippetsTbody.querySelectorAll('input').forEach(input => {
           input.removeAttribute('readonly')
           input.classList.remove('copyable')
         })
-        charSnippetsEditButton.textContent = saveText
+        charSnippetsEditButton.textContent = app.saveText
       }
     })
 
@@ -108,17 +108,17 @@ window.addEventListener('DOMContentLoaded', _ => {
      * =================================================================================================================
      */
 
-    numberOfRows = storage.snippets.text.length <= minNumberOfTrs
-      ? minNumberOfTrs
-      : storage.snippets.text.length
+    numberOfRows = storage.snippets.textSnippets.length <= app.minNumberOfTrs
+      ? app.minNumberOfTrs
+      : storage.snippets.textSnippets.length
     for (let i = 0; i < numberOfRows; i++) {
       let tr = document.createElement('tr')
       let td = document.createElement('td')
       let textarea = document.createElement('textarea')
       textarea.setAttribute('readonly', 'true')
       textarea.classList.add('copyable')
-      textarea.value = storage.snippets.text[i] || ''
-      if (i >= minNumberOfTrs) {
+      textarea.value = storage.snippets.textSnippets[i] || ''
+      if (i >= app.minNumberOfTrs) {
         td.appendChild(getTextSnippetDeleteRowButton())
       }
       td.appendChild(textarea)
@@ -127,7 +127,7 @@ window.addEventListener('DOMContentLoaded', _ => {
     }
 
     textSnippetsEditButton.addEventListener('click', _ => {
-      if (textSnippetsEditButton.textContent === saveText) {
+      if (textSnippetsEditButton.textContent === app.saveText) {
         const snippets = []
         textSnippetsTbody.querySelectorAll('textarea').forEach(textarea => {
           textarea.setAttribute('readonly', 'true')
@@ -135,16 +135,16 @@ window.addEventListener('DOMContentLoaded', _ => {
           snippets.push(textarea.value)
         })
         chrome.storage.sync.get(storage => {
-          storage.snippets.text = snippets
+          storage.snippets.textSnippets = snippets
           chrome.storage.sync.set(storage)
-          textSnippetsEditButton.textContent = editText
+          textSnippetsEditButton.textContent = app.editText
         })
       } else {
         textSnippetsTbody.querySelectorAll('textarea').forEach(textarea => {
           textarea.removeAttribute('readonly')
           textarea.classList.remove('copyable')
         })
-        textSnippetsEditButton.textContent = saveText
+        textSnippetsEditButton.textContent = app.saveText
       }
     })
 
@@ -184,7 +184,7 @@ window.addEventListener('DOMContentLoaded', _ => {
   {
     const snippets = []
     charSnippetsTbody.querySelectorAll('input').forEach(input => snippets.push(input.value))
-    storage.snippets.char = snippets
+    storage.snippets.charSnippets = snippets
     chrome.storage.sync.set(storage)
   }
 
@@ -192,7 +192,7 @@ window.addEventListener('DOMContentLoaded', _ => {
   {
     const snippets = []
     textSnippetsTbody.querySelectorAll('textarea').forEach(textarea => snippets.push(textarea.value))
-    storage.snippets.text = snippets
+    storage.snippets.textSnippets = snippets
     chrome.storage.sync.set(storage)
   }
 

@@ -5,14 +5,15 @@ chrome.runtime.onInstalled.addListener(_ => {
   chrome.storage.sync.get(storage => {
     if (!storage.snippets) {
       storage.snippets = {
-        char: [],
-        text: [],
+        charSnippets: [],
+        textSnippets: [],
       }
     }
     chrome.storage.sync.set({
       snippets: {
-        char: storage.snippets.char,
-        text: storage.snippets.text,
+        // storage.snippets.char & storage.snippets.text are used for compatibility with earlier version
+        charSnippets: storage.snippets.char || storage.snippets.charSnippets,
+        textSnippets: storage.snippets.text || storage.snippets.textSnippets,
       },
     })
   })
