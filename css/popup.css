@@ -15,9 +15,14 @@ hr {
   margin: 10px 0;
 }
 
-.copyable {
+input[readonly],
+textarea[readonly] {
   background: #fafafa;
   cursor: copy;
+}
+
+table td {
+  position: relative; /* For the cross "Delete row / snippet" */
 }
 
 #char-snippets-header-container,
@@ -37,9 +42,16 @@ hr {
 #char-snippets-footer-container,
 #text-snippets-footer-container {
   display: flex;
-  align-items: center;
   justify-content: space-between;
   margin-top: 10px;
+}
+
+#char-snippets-table .delete-row-button,
+#text-snippets-table .delete-snippet-button {
+  color: #f00;
+  cursor: pointer;
+  display: block;
+  position: absolute;
 }
 
 /*
@@ -51,7 +63,6 @@ hr {
 #char-snippets-table td {
   border: 1px solid #ccc;
   padding: 0;
-  position: relative; /* For the cross "Delete" */
 }
 
 #char-snippets-table input {
@@ -63,16 +74,8 @@ hr {
   text-align: center;
 }
 
-#char-snippets-table input[disabled] {
-  cursor: copy;
-}
-
 #char-snippets-table .delete-row-button {
-  color: #f00;
-  cursor: pointer;
-  display: block;
-  position: absolute;
-  top: 9px;
+  top: 23%;
   right: -10px;
 }
 
@@ -86,10 +89,6 @@ hr {
   width: 100%;
 }
 
-#text-snippets-table td {
-  position: relative; /* For the cross "Delete" */
-}
-
 #text-snippets-table textarea {
   border: 1px solid #ccc;
   field-sizing: content;
@@ -100,17 +99,9 @@ hr {
   resize: vertical;
 }
 
-#text-snippets-table textarea[disabled] {
-  cursor: copy;
-}
-
 #text-snippets-table .delete-snippet-button {
-  color: #f00;
-  cursor: pointer;
-  display: block;
-  position: absolute;
-  top: 0;
-  right: -9px;
+  top: 33%;
+  right: -11px;
 }
 
 /*
@@ -121,5 +112,5 @@ hr {
 
 #export-import-buttons-container {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
 }
