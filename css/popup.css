@@ -91,7 +91,7 @@ table td {
 
 #text-snippets-table textarea {
   border: 1px solid #ccc;
-  field-sizing: content;
+  /*field-sizing: content;*/
   max-width: 344px;
   min-height: 50px;
   width: 100%;
@@ -106,10 +106,20 @@ table td {
 
 /*
  * =====================================================================================================================
- * EXPORT & IMPORT
+ * EXPORT/IMPORT BUTTONS, SIDE PANEL MODE CHECKBOX
  * =====================================================================================================================
  */
 
-#export-import-buttons-container {
-  text-align: center;
+#footer-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#side-panel-mode-box {
+  cursor: pointer;
+}
+
+#side-panel-mode-checkbox {
+  vertical-align: middle;
 }

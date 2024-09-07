@@ -3,11 +3,12 @@
 
 window.addEventListener('DOMContentLoaded', _ => {
 
-  const app = {}
-  app.minNumberOfTrs = 2
-  app.numberOfTds = 10
-  app.editText = 'Edit'
-  app.saveText = 'Save'
+  const app = {
+    minNumberOfTrs: 2,
+    numberOfTds: 10,
+    editText: 'Edit',
+    saveText: 'Save',
+  }
 
   const charSnippetsEditButton = document.getElementById('char-snippets-edit-save-button')
   charSnippetsEditButton.textContent = app.editText
@@ -156,124 +157,140 @@ window.addEventListener('DOMContentLoaded', _ => {
       setTextSnippets(storage)
     })
 
-  })
+    /*
+     * =================================================================================================================
+     * COMMON FUNCTIONS
+     * =================================================================================================================
+     */
 
-  /*
-   * =================================================================================================================
-   * COMMON FUNCTIONS
-   * =================================================================================================================
-   */
+    charSnippetsTable.addEventListener('input', _ => storage => setCharSnippets(storage))
+    textSnippetsTable.addEventListener('input', _ => storage => setTextSnippets(storage))
 
-  charSnippetsTable.addEventListener('input', _ => storage => setCharSnippets(storage))
-  textSnippetsTable.addEventListener('input', _ => storage => setTextSnippets(storage))
-
-  function setCharSnippets(storage)
-  {
-    const snippets = []
-    charSnippetsTable.querySelectorAll('input').forEach(input => snippets.push(input.value))
-    storage.snippets.charSnippets = snippets
-    chrome.storage.sync.set(storage)
-  }
-
-  function setTextSnippets(storage)
-  {
-    const snippets = []
-    textSnippetsTable.querySelectorAll('textarea').forEach(textarea => snippets.push(textarea.value))
-    storage.snippets.textSnippets = snippets
-    chrome.storage.sync.set(storage)
-  }
-
-  function getCharSnippetsDeleteRowButton()
-  {
-    const span = document.createElement('span')
-    span.classList.add('delete-row-button')
-    span.setAttribute('title', 'Delete row')
-    span.textContent = '×'
-    return span
-  }
-
-  function getTextSnippetDeleteRowButton()
-  {
-    const span = document.createElement('span')
-    span.classList.add('delete-snippet-button')
-    span.setAttribute('title', 'Delete snippet')
-    span.textContent = '×'
-    return span
-  }
-
-  function copySnippet(event, selector)
-  {
-    if (!event.target.readOnly) {
-      return
+    function setCharSnippets(storage)
+    {
+      const snippets = []
+      charSnippetsTable.querySelectorAll('input').forEach(input => snippets.push(input.value))
+      storage.snippets.charSnippets = snippets
+      chrome.storage.sync.set(storage)
     }
-    const copiedMessage = document.getElementById(selector)
-    if (!event.target.value) {
-      copiedMessage.textContent = 'Nothing to copy!'
-    } else {
-      copyTextToClipboard(event.target.value)
-      copiedMessage.textContent = 'Copied!'
+
+    function setTextSnippets(storage)
+    {
+      const snippets = []
+      textSnippetsTable.querySelectorAll('textarea').forEach(textarea => snippets.push(textarea.value))
+      storage.snippets.textSnippets = snippets
+      chrome.storage.sync.set(storage)
     }
-    copiedMessage.style.visibility = 'visible'
-    setTimeout(_ => {
-      copiedMessage.style.visibility = 'hidden'
-      copiedMessage.textContent = ''
-    }, 1000)
-  }
 
-  function copyTextToClipboard(text)
-  {
-    const textarea = document.createElement('textarea')
-    textarea.value = text
-    document.body.appendChild(textarea)
-    textarea.select()
-    document.execCommand('copy')
-    document.body.removeChild(textarea)
-  }
+    function getCharSnippetsDeleteRowButton()
+    {
+      const span = document.createElement('span')
+      span.classList.add('delete-row-button')
+      span.setAttribute('title', 'Delete row')
+      span.textContent = '×'
+      return span
+    }
 
-  /*
-   * =================================================================================================================
-   * EXPORT/IMPORT BUTTONS
-   * =================================================================================================================
-   */
+    function getTextSnippetDeleteRowButton()
+    {
+      const span = document.createElement('span')
+      span.classList.add('delete-snippet-button')
+      span.setAttribute('title', 'Delete snippet')
+      span.textContent = '×'
+      return span
+    }
 
-  // https://stackoverflow.com/a/23167789/4223982
-  document
-    .getElementById('export-button')
-    .addEventListener('click', _ => {
-      chrome.storage.sync.get(storage => {
-        chrome.downloads.download({
-          url: 'data:application/json;base64,' + btoa(
-            unescape( // https://stackoverflow.com/a/26603875/4223982
-              encodeURIComponent(JSON.stringify(storage))
-            )
-          ),
-          filename: 'text-snippets.json',
+    function copySnippet(event, selector)
+    {
+      if (!event.target.readOnly) {
+        return
+      }
+      const copiedMessage = document.getElementById(selector)
+      if (!event.target.value) {
+        copiedMessage.textContent = 'Nothing to copy!'
+      } else {
+        copyTextToClipboard(event.target.value)
+        copiedMessage.textContent = 'Copied!'
+      }
+      copiedMessage.style.visibility = 'visible'
+      setTimeout(_ => {
+        copiedMessage.style.visibility = 'hidden'
+        copiedMessage.textContent = ''
+      }, 1000)
+    }
+
+    function copyTextToClipboard(text)
+    {
+      const textarea = document.createElement('textarea')
+      textarea.value = text
+      document.body.appendChild(textarea)
+      textarea.select()
+      document.execCommand('copy')
+      document.body.removeChild(textarea)
+    }
+
+    /*
+     * =================================================================================================================
+     * EXPORT/IMPORT BUTTONS, SIDE PANEL MODE CHECKBOX
+     * =================================================================================================================
+     */
+
+    // https://stackoverflow.com/a/23167789/4223982
+    document
+      .getElementById('export-button')
+      .addEventListener('click', _ => {
+        chrome.storage.sync.get(storage => {
+          chrome.downloads.download({
+            url: 'data:application/json;base64,' + btoa(
+              unescape( // https://stackoverflow.com/a/26603875/4223982
+                encodeURIComponent(JSON.stringify(storage))
+              )
+            ),
+            filename: 'text-snippets.json',
+          })
         })
       })
-    })
 
-  // https://stackoverflow.com/a/36930012/4223982
-  document
-    .getElementById('import-button')
-    .addEventListener('click', _ => {
-      const fileChooser = document.createElement('input')
-      fileChooser.type = 'file'
-      fileChooser.addEventListener('change', _ => {
-        const file = fileChooser.files[0]
-        const reader = new FileReader()
-        reader.onload = _ => {
-          const storage = JSON.parse('' + reader.result)
-          chrome.storage.sync.set(storage, _ => {
-            location.reload()
-            alert('Imported!')
-          })
-        }
-        reader.readAsText(file)
-        form.reset()
+    // https://stackoverflow.com/a/36930012/4223982
+    document
+      .getElementById('import-button')
+      .addEventListener('click', _ => {
+        const fileChooser = document.createElement('input')
+        fileChooser.type = 'file'
+        fileChooser.addEventListener('change', _ => {
+          const file = fileChooser.files[0]
+          const reader = new FileReader()
+          reader.onload = _ => {
+            const storage = JSON.parse('' + reader.result)
+            chrome.storage.sync.set(storage, _ => {
+              location.reload()
+              alert('Imported!')
+            })
+          }
+          reader.readAsText(file)
+          form.reset()
+        })
+        const form = document.createElement('form')
+        form.appendChild(fileChooser)
+        fileChooser.click()
       })
-      const form = document.createElement('form')
-      form.appendChild(fileChooser)
-      fileChooser.click()
+
+    const sidePanelModeCheckbox = document.getElementById('side-panel-mode-checkbox')
+    sidePanelModeCheckbox.checked = storage.sidePanelMode
+
+    sidePanelModeCheckbox.addEventListener('change', e => {
+      if (e.target.checked) {
+        chrome.storage.sync.set({sidePanelMode: true})
+        close()
+        chrome.tabs.query({active: true, currentWindow: true}, tabs => chrome.sidePanel.open({tabId: tabs[0].id}))
+        chrome.sidePanel.setPanelBehavior({openPanelOnActionClick: true})
+      } else {
+        chrome.storage.sync.set({sidePanelMode: false})
+        close()
+        chrome.sidePanel.setPanelBehavior({openPanelOnActionClick: false})
+        chrome.action.openPopup()
+      }
     })
 
+  })
 })

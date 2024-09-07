@@ -20,8 +20,12 @@
   "background": {
     "service_worker": "js/service-worker.js"
   },
+  "side_panel": {
+    "default_path": "html/popup.html"
+  },
   "permissions": [
     "downloads",
+    "sidePanel",
     "storage"
   ]
 }
