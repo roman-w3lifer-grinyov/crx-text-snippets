@@ -261,7 +261,10 @@ window.addEventListener('DOMContentLoaded', _ => {
         const reader = new FileReader()
         reader.onload = _ => {
           const storage = JSON.parse('' + reader.result)
-          chrome.storage.sync.set(storage, _ => alert('Imported!'))
+          chrome.storage.sync.set(storage, _ => {
+            location.reload()
+            alert('Imported!')
+          })
         }
         reader.readAsText(file)
         form.reset()
