@@ -7,7 +7,8 @@
 
 ---
 
-![Text Snippets - Example](img/screenshots/1280x800/example.png)
+![Text Snippets - Example 1](img/screenshots/1280x800/example-1.png)
+![Text Snippets - Example 2](img/screenshots/1280x800/example-2.png)
 
 ---
 
