@@ -111,6 +111,5 @@ table td {
  */
 
 #export-import-buttons-container {
-  display: flex;
-  justify-content: space-between;
+  text-align: center;
 }
