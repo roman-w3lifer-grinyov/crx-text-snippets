@@ -20,8 +20,8 @@ chrome.runtime.onInstalled.addListener(_ => {
             initialStorage.snippets.charSnippets,
           textSnippets: (storage.snippets && (storage.snippets.text || storage.snippets.textSnippets)) ||
             initialStorage.snippets.textSnippets,
-          sidePanelMode: !!storage.sidePanelMode,
         },
+        sidePanelMode: !!storage.sidePanelMode,
       }
     }
     chrome.storage.sync.set(storage)
