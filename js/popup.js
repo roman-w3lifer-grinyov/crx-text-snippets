@@ -267,8 +267,15 @@ window.addEventListener('DOMContentLoaded', _ => {
           reader.onload = _ => {
             const storage = JSON.parse('' + reader.result)
             chrome.storage.sync.set(storage, _ => {
-              location.reload()
-              alert('Imported!')
+              if (storage.sidePanelMode) {
+                chrome.tabs.query({active: true, currentWindow: true}, tabs => chrome.sidePanel.open({tabId: tabs[0].id}))
+                chrome.sidePanel.setPanelBehavior({openPanelOnActionClick: true})
+                alert('Imported!')
+                close()
+              } else {
+                location.reload()
+                alert('Imported!')
+              }
             })
           }
           reader.readAsText(file)
